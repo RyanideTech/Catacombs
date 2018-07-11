@@ -6,16 +6,203 @@ namespace AdventureGame
 {
     public static class Game
     {
-        private static string choice;
+        public static string choice;
         public static bool Ch1Restart = false;
         public static Random battleChance = new Random(); 
         public static List<Weapon> backpackWeapons = new List<Weapon>();
-        public static List<Weapon> backpackItems = new List<Weapon>();
+        public static List<Item> backpackItems = new List<Item>();
         public static List<Keystone> backpackKeystones = new List<Keystone>();
         public static Dictionary<Enemy, string> active = new Dictionary<Enemy, string>();
         public static Enemy c2Wraith = new Enemy("Wraith of the Shrouded Eye", 25, "staff", 7, 0.01, 0, "L1C2");
         public static bool Ch1 = false;
-        private static void Dialogue(string line)
+        public static bool KeystoneName = false;
+        public static int Chamber;
+
+        public static void Pack()
+        {
+            Console.Clear();
+            Narration("You remove your backpack from your shoulder and reach inside...");
+            Narration("Inside are three pouches:");
+            Console.WriteLine("Weapons.");
+            Thread.Sleep(60);
+            Console.WriteLine("Items.");
+            Thread.Sleep(60);
+            if(KeystoneName == true)
+            {
+                Console.WriteLine("Keystone fragments");
+            }
+            else
+            {
+                Console.WriteLine("??????????????????");
+            }
+
+            bool pack = true;
+            while(pack == true)
+            {
+                Break();
+                Narration("Which pouch do you open?");
+                PlayerChoice();
+                if (choice == "weapons")
+                {
+                    bool weapons = true;
+                    while (weapons == true)
+                    {
+
+                        Console.Clear();
+                        Console.WriteLine("Your Weapons:");
+                        Console.WriteLine();
+                        foreach (var c in backpackWeapons)
+                        {
+                            Console.WriteLine(c.Name + " --- " + c.Description + " --- " + c.HP + " remaining.");
+                            Thread.Sleep(60);
+                        }
+                        Console.WriteLine();
+                        Narration("Select a weapon or CLOSE the pouch:");
+                        PlayerChoice();
+                        if (backpackWeapons.Any(p => p.Name == choice))
+                        {
+                            int weaponIndex = backpackWeapons.FindIndex(p => p.Name == choice);
+                            Narration("USE or DROP?");
+                            PlayerChoice();
+                            if (choice == "drop")
+                            {
+                                //Dynamically add drops for each cavern here
+                                if (ChapterOne.ChOne == true && ChapterOne.Cav1 == true)
+                                {
+                                    ChapterOne.ChamberOneDrop.Add(backpackWeapons[weaponIndex]);
+                                    Narration("You remove your " + backpackWeapons[weaponIndex].Name + " from your pack.");
+                                    Narration("It will remain in this chamber if you return.");
+                                    Break();
+                                    backpackWeapons.Remove(backpackWeapons[weaponIndex]);
+                                }
+                            }
+                            else if (choice == "use")
+                            {
+                                int choiceIndex = backpackWeapons.FindIndex(p => p.Name == choice);
+                                backpackWeapons.Insert(0, backpackWeapons[choiceIndex]);
+                                backpackWeapons.Remove(backpackWeapons[choiceIndex + 1]);
+                                Console.WriteLine();
+                                Narration("You move your " + backpackWeapons[choiceIndex].Name + " to the top of your pack.");
+                                Narration("It will come to you the next time you enter a battle");
+                                Break();
+                            }
+                            else
+                            {
+                                Narration("You can't do this right now, please either USE or DROP your chosen weapon.");
+                                Break();
+                            }
+                        }
+                        else if (choice == "close")
+                        {
+                            weapons = false;
+                            Narration("You close the pouch and begin looking through the rest of your pack.");
+                            Break();
+                            Console.Clear();
+                        }
+                        else
+                        {
+                            Narration("You can't do this right now, please either select a weapon or CLOSE the pouch.");
+                            Break();
+                        }
+                    }
+                }
+                else if (choice == "items")
+                {
+                    bool items = true;
+                    while (items == true)
+                    {
+                        Console.WriteLine("Your Items:");
+                        Console.WriteLine();
+                        foreach (var c in backpackItems)
+                        {
+                            Console.WriteLine(c.Name + " --- " + c.Description + " --- " + c.Effect);
+                            Thread.Sleep(60);
+                        }
+                        Console.WriteLine();
+                        Narration("Select a item or CLOSE the pouch:");
+                        PlayerChoice();
+                        if (backpackItems.Any(p => p.Name == choice))
+                        {
+                            int ItemIndex = backpackItems.FindIndex(p => p.Name == choice);
+                            Narration("USE or DROP");
+                            PlayerChoice();
+                            if (choice == "drop")
+                            {
+                                //Dynamically add drop lists here
+                                if (ChapterOne.Cav1 == true)
+                                {
+                                    ChapterOne.ChamberOneItemDrop.Add(backpackItems[ItemIndex]);
+                                    Narration("You remove your " + backpackItems[ItemIndex].Name + " from your pack.");
+                                    Narration("It will remain in this chamber if you return.");
+                                    Break();
+                                }
+                            }
+                            else if (choice == "use")
+                            {
+                                //Dynamically add item effect here
+                            }
+                            else
+                            {
+                                Narration("You can't do this right now, please either USE or DROP your chosen item.");
+                                Break();
+                            }
+                        }
+                        else if (choice == "close")
+                        {
+                            items = false;
+                            Narration("You close the pouch and begin looking through the rest of your pack.");
+                            Break();
+                            Console.Clear();
+                        }
+                        else
+                        {
+                            Narration("You can't do this right now, please either select an item or CLOSE the pouch.");
+                            Break();
+                        }
+                    }
+                }
+                else if (choice == "??????????????????" || choice == "?" || choice == "keystone fragments")
+                {
+                    if (KeystoneName == true)
+                    {
+                        Console.WriteLine("Your Keystone Fragments:");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("??????????????????");
+                        Console.WriteLine();
+                    }
+                    foreach(var c in backpackKeystones)
+                    {
+                        Console.WriteLine(c.Color + c.Name) ;
+                        Thread.Sleep(60);
+                    }
+                    if(KeystoneName == true)
+                    {
+                        Break();
+                        //Dynamically Add Chapter Keystone totals here
+                        if(ChapterOne.running == true)
+                        {
+                            Narration("You require " + (ChapterOne.KeystoneTotal - backpackKeystones.Count) + " to escape the cavern.");
+                        }
+                    }
+                    Narration("CLOSE the pouch?");
+                    PlayerChoice();
+                }else if (choice == "close")
+                {
+                    pack = false;
+                    Narration("You close the flap of your pack and sling it back over your shoulder.");
+                    Break();
+                    Console.Clear();
+                }
+                else
+                {
+                    Narration("You can't do that right now, please select a pouch or CLOSE your pack.");
+                }
+            }
+        }
+        public static void Dialogue(string line)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             foreach (char c in line)
@@ -27,7 +214,7 @@ namespace AdventureGame
             Console.WriteLine();
         }
 
-        private static void PlayerSpeak(string line)
+        public static void PlayerSpeak(string line)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.CursorLeft = Console.BufferWidth - line.Length;
@@ -40,7 +227,7 @@ namespace AdventureGame
             Console.WriteLine();
         }
 
-        private static void Narration(string line)
+        public static void Narration(string line)
         {
             foreach (char c in line)
             {
@@ -50,7 +237,7 @@ namespace AdventureGame
             Console.WriteLine();
         }
 
-        private static void EnemySpeak(string line)
+        public static void EnemySpeak(string line)
         {
             Console.ForegroundColor = ConsoleColor.Red;
 
@@ -64,12 +251,12 @@ namespace AdventureGame
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
-        private static void Break()
+        public static void Break()
         {
             Console.WriteLine();
             Thread.Sleep(3000);
         }
-        private static void PlayerChoice()
+        public static void PlayerChoice()
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("> ");
@@ -78,7 +265,7 @@ namespace AdventureGame
             Console.WriteLine();
         }
 
-        private static void Battle(Enemy enemy)
+        public static void Battle(Enemy enemy)
         {
             Console.Clear();
             Narration("Drawing your " + backpackWeapons[0].Name + " and assuming a battle stance,");
@@ -638,16 +825,8 @@ namespace AdventureGame
                 Break();
                 Thread.Sleep(2000);
                 Console.Clear();
-                Thread.Sleep(3000);
-                Narration("You stand at the center of the chamber, four passages surround you.");
-                Narration("One continues to the West, one to the North, and a third to the East.");
-                Narration("The fourth passageway leads the the chamber in which you awoke.");
-                Break();
-                Narration("What do you do?");
-                PlayerChoice();
-
-
-
+                ChapterOne.Cavern1();
+                    
             }
         }
     }
