@@ -57,7 +57,11 @@ namespace AdventureGame
                 Console.Write("A ");
                 foreach (var c in weapons)
                 {
-                    if (c == weapons[weapons.Count - 1])
+                    if(weapons.Count == 1)
+                    {
+                        Console.Write(c.Name);
+                    }
+                    else if (c == weapons[weapons.Count - 1])
                     {
                         Console.Write("and a " + c.Name);
                     }
@@ -79,7 +83,11 @@ namespace AdventureGame
                 Console.Write("A ");
                 foreach (var c in items)
                 {
-                    if (c == items[items.Count - 1])
+                    if(items.Count == 1)
+                    {
+                        Console.Write(c.Name);
+                    }
+                    else if (c == items[items.Count - 1])
                     {
                         Console.Write("and a " + c.Name);
                     }
@@ -99,10 +107,15 @@ namespace AdventureGame
             {
                  dropped = false;
             }
-            if(dropped == true)
+            if (dropped == true && ((weapons.Count > 1 || items.Count > 1) || (weapons.Count == 1 && items.Count == 1)))
             {
                 Console.Write(" lie on the ground.");
             }
+            else if (dropped == true && ((weapons.Count == 1 && items.Count == 0) || (weapons.Count == 0 && items.Count == 1))) 
+            {
+                Console.Write(" lies on the ground.");
+            }
+            Game.Break();
         }
 
         public static void Cavern1()
@@ -112,7 +125,7 @@ namespace AdventureGame
             Thread.Sleep(3000);
             Game.Narration("You stand at the center of the chamber, four passages surround you.");
             Game.Narration("One continues to the West, one to the North, and a third to the East.");
-            Game.Narration("The fourth passageway leads the the chamber in which you awoke.");
+            Game.Narration("The fourth passageway leads to the the chamber in which you awoke.");
             DropPrint(ChamberOneDrop, ChamberOneItemDrop);
             Game.Break();
             Game.Narration("What do you do?");
@@ -126,6 +139,21 @@ namespace AdventureGame
             {
                 Cavern4();
             }
+        }
+
+        public static void Cavern2()
+        {
+
+        }
+
+        public static void Cavern3()
+        {
+
+        }
+
+        public static void Cavern4()
+        {
+
         }
     }
 }
