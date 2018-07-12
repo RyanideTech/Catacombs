@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AdventureGame
 {
-    class Item
+    public class Item
     {
     }
 }
