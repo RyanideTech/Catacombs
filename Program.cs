@@ -328,7 +328,7 @@ namespace AdventureGame
 
                     if(enemy.Health <= 0)
                     {
-                        Narration("With a final burst of magical energy from your " + backpackItems[0].Name + " the " + enemy.Name + " dissolves into a mist.");
+                        Narration("With a final burst of magical energy from your " + backpackWeapons[0].Name + " the " + enemy.Name + " dissolves into a mist.");
                         Console.ForegroundColor = ConsoleColor.Magenta;
                         Break();
                         string success = "Success! The " + enemy.Name + " is defeated!";
