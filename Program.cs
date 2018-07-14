@@ -6,6 +6,7 @@ namespace AdventureGame
 {
     public static class Game
     {
+        public static bool dropped = false;
         public static string choice;
         public static bool Ch1Restart = false;
         public static Random battleChance = new Random(); 
@@ -17,6 +18,109 @@ namespace AdventureGame
         public static bool Ch1 = false;
         public static bool KeystoneName = false;
         public static int Chamber;
+
+        public static void DropPrint(List<Weapon> weapons, List<Item> items)
+        {
+            if (weapons.Count > 0 && items.Count > 0)
+            {
+                Console.WriteLine();
+                Console.Write("A ");
+                foreach (var c in items)
+                {
+                    if (items.Count == 1)
+                    {
+                        Console.Write(c.Name + ", ");
+                    }
+                    else if (c == items[0])
+                    {
+                        Console.Write(c.Name + ", ");
+                    }
+                    else
+                    {
+                        Console.Write("a " + c.Name + ", ");
+                    }
+                    Thread.Sleep(60);
+                }
+                foreach (var c in weapons)
+                {
+                    if (c == weapons[weapons.Count - 1])
+                    {
+                        Console.Write("and a " + c.Name);
+                    }
+                    else
+                    {
+                        Console.Write("a " + c.Name + ", ");
+                    }
+                    Thread.Sleep(60);
+                }
+                dropped = true;
+            }
+            else if (weapons.Count > 0)
+            {
+                Console.WriteLine();
+                Console.Write("A ");
+                foreach (var c in weapons)
+                {
+                    if (weapons.Count == 1)
+                    {
+                        Console.Write(c.Name);
+                    }
+                    else if (c == weapons[weapons.Count - 1])
+                    {
+                        Console.Write("and a " + c.Name);
+                    }
+                    else if (c == weapons[0])
+                    {
+                        Console.Write(c.Name + ", ");
+                    }
+                    else
+                    {
+                        Console.Write("a " + c.Name + ", ");
+                    }
+                    Thread.Sleep(60);
+                }
+                dropped = true;
+            }
+            else if (items.Count > 0)
+            {
+                Console.WriteLine();
+                Console.Write("A ");
+                foreach (var c in items)
+                {
+                    if (items.Count == 1)
+                    {
+                        Console.Write(c.Name);
+                    }
+                    else if (c == items[items.Count - 1])
+                    {
+                        Console.Write("and a " + c.Name);
+                    }
+                    else if (c == items[0])
+                    {
+                        Console.Write(c.Name + ", ");
+                    }
+                    else
+                    {
+                        Console.Write("a " + c.Name + ", ");
+                    }
+                    Thread.Sleep(60);
+                }
+                dropped = true;
+            }
+            else
+            {
+                dropped = false;
+            }
+            if (dropped == true && ((weapons.Count > 1 || items.Count > 1) || (weapons.Count == 1 && items.Count == 1)))
+            {
+                Console.Write(" lie on the ground.");
+            }
+            else if (dropped == true && ((weapons.Count == 1 && items.Count == 0) || (weapons.Count == 0 && items.Count == 1)))
+            {
+                Console.Write(" lies on the ground.");
+            }
+            Break();
+        }
 
         public static void Pack()
         {
