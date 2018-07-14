@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using static AdventureGame.Game;
 
 namespace AdventureGame
 {
@@ -17,24 +18,49 @@ namespace AdventureGame
 
         public static void Cavern1()
         {
-            Console.Clear();
             Cav1 = true;
-            Thread.Sleep(3000);
-            Game.Narration("You stand at the center of the chamber, four passages surround you.");
-            Game.Narration("One continues to the West, one to the North, and a third to the East.");
-            Game.Narration("The fourth passageway leads to the the chamber in which you awoke.");
-            DropPrint(ChamberOneDrop, ChamberOneItemDrop);
-            Game.Break();
-            Game.Narration("What do you do?");
-            Game.PlayerChoice();
-            if (Game.choice == "go west"){
-                Cavern2();
-            }else if(Game.choice == "go north")
+            while (Cav1 == true)
             {
-                Cavern3();
-            }else if(Game.choice == "go east")
-            {
-                Cavern4();
+                Console.Clear();
+                Thread.Sleep(3000);
+                Narration("You stand at the center of the chamber, four passages surround you.");
+                Narration("One continues to the West, one to the North, and a third to the East.");
+                Narration("The fourth passageway leads to the the chamber in which you awoke.");
+                DropPrint(ChamberOneDrop, ChamberOneItemDrop);
+                Break();
+                Narration("What do you do?");
+                PlayerChoice();
+                if (choice == "go west")
+                {
+                    Cav1 = false;
+                    Cavern2();
+                }
+                else if (choice == "go north")
+                {
+                    Cav1 = false;
+                    Cavern3();
+                }
+                else if (choice == "go east")
+                {
+                    Cav1 = false;
+                    Cavern4();
+                }
+                else if (choice == "go south")
+                {
+                    Narration("You begin to walk back towards the chamber in which you fell...");
+                    Narration("As you enter the passage, a flash of energy knocks you to the ground.");
+                    Break();
+                    Narration("To escape the catacombs, you must navagate the chambers ahead.");
+                }
+                else if(choice == "open pack")
+                {
+                    Pack();
+                }
+                else
+                {
+                    Narration("You can't do this right now.");
+                    Break();
+                }
             }
         }
 
@@ -49,6 +75,71 @@ namespace AdventureGame
         }
 
         public static void Cavern4()
+        {
+
+        }
+
+        public static void Cavern5()
+        {
+
+        }
+
+        public static void Cavern6()
+        {
+
+        }
+
+        public static void Cavern7()
+        {
+
+        }
+
+        public static void Cavern8()
+        {
+
+        }
+
+        public static void Cavern9()
+        {
+
+        }
+
+        public static void Cavern10()
+        {
+
+        }
+
+        public static void Cavern11()
+        {
+
+        }
+
+        public static void Cavern12()
+        {
+
+        }
+
+        public static void Cavern13()
+        {
+
+        }
+
+        public static void Cavern14()
+        {
+
+        }
+
+        public static void Cavern15()
+        {
+
+        }
+
+        public static void Cavern16()
+        {
+
+        }
+
+        public static void Cavern17()
         {
 
         }
