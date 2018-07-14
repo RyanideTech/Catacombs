@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 namespace AdventureGame
 {
-
     class Program
     {
         static void Main(string[] args)
