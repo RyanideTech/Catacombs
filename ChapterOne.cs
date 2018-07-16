@@ -192,11 +192,11 @@ namespace AdventureGame
                                 Player.health -= 5;
                                 EnemySpeak("Health Remaining: " + Player.health + "/" + Player.healthFull);
                                 Break();
-                                Narration("Try again?");
-                                PlayerChoice();
                                 bool check = false;
                                 while (check == false)
                                 {
+                                    Narration("Try again?");
+                                    PlayerChoice();
                                     if (choice == "yes")
                                     {
                                         reading = true;
