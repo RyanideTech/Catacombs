@@ -490,8 +490,9 @@ namespace AdventureGame
                         if (backpackWeapons.Any(p => p.Name == choice))
                         {
                             int itemIndex = backpackWeapons.FindIndex(p => p.Name == choice);
-                            backpackWeapons.Insert(0, backpackWeapons[itemIndex]);
-                            backpackWeapons.Remove(backpackWeapons[itemIndex + 1]);
+                            var item = backpackWeapons[itemIndex];
+                            backpackWeapons[itemIndex] = backpackWeapons[0];
+                            backpackWeapons[0] = item;
                             Console.WriteLine();
                             Narration("You draw your " + backpackWeapons[0].Name + " from your bag and turn to the " + enemy.Name + ".");
                             Break();
@@ -775,7 +776,6 @@ namespace AdventureGame
             while (Enterence == true)
             {
                 Thread.Sleep(3000);
-                Console.Clear();
                 Thread.Sleep(3000);
                 Narration("What do you do?");
                 Console.WriteLine();
