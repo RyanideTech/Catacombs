@@ -22,6 +22,7 @@ namespace AdventureGame
                 Console.Write(c);
                 Thread.Sleep(60);
             }
+            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Gray;
             Game.backpackKeystones.Add(this);
         }
