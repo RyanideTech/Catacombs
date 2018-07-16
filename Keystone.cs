@@ -16,7 +16,7 @@ namespace AdventureGame
         {
             this.Number = number;
             Console.ForegroundColor = ConsoleColor.Yellow;
-            string itemMessage = "You got a " + Color + Name + ".";
+            string itemMessage = "You got a " + Color +" "+ Name + ".";
             foreach (char c in itemMessage)
             {
                 Console.Write(c);
