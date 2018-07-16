@@ -122,6 +122,7 @@ namespace AdventureGame
                 Console.Write(" lies on the ground.");
             }
             Break();
+            dropped = false;
         }
 
         public static void Pack()
@@ -181,6 +182,12 @@ namespace AdventureGame
                                     Break();
                                     backpackWeapons.Remove(backpackWeapons[weaponIndex]);
                                 }
+                                else if(ChapterOne.ChOne == true && ChapterOne.Cav2 == true)
+                                {
+                                    ChapterOne.ChamberTwoDrop.Add(backpackWeapons[weaponIndex]);
+                                    Narration("You remove your " + backpackWeapons[weaponIndex].Name + " from your pack.");
+                                    Narration("It will remain in this chamber if you return.");
+                                }
                             }
                             else if (choice == "use")
                             {
@@ -235,9 +242,16 @@ namespace AdventureGame
                             if (choice == "drop")
                             {
                                 //Dynamically add drop lists here
-                                if (ChapterOne.Cav1 == true)
+                                if (ChapterOne.ChOne == true && ChapterOne.Cav1 == true)
                                 {
                                     ChapterOne.ChamberOneItemDrop.Add(backpackItems[ItemIndex]);
+                                    Narration("You remove your " + backpackItems[ItemIndex].Name + " from your pack.");
+                                    Narration("It will remain in this chamber if you return.");
+                                    Break();
+                                }
+                                else if(ChapterOne.ChOne == true && ChapterOne.Cav2 == true)
+                                {
+                                    ChapterOne.ChamberTwoItemDrop.Add(backpackItems[ItemIndex]);
                                     Narration("You remove your " + backpackItems[ItemIndex].Name + " from your pack.");
                                     Narration("It will remain in this chamber if you return.");
                                     Break();
