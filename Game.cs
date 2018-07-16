@@ -916,7 +916,7 @@ namespace AdventureGame
                 Narration("...");
                 Break();
                 Narration("The Gatekeeper reaches out a claw-like hand from beneath its cloak.");
-                Narration("The air around becomes energized, as if the room were filled with electricity...");
+                Narration("The air around you becomes energized, as if the room were filled with electricity...");
                 Narration("As the sensation intensifies, you notice a shape has begun to form around the Gatekeeper's outstretched hand.");
                 Break();
                 Dialogue("Take this with you on your journey, it will help you to contain the magic of the items you find.");
