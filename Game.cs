@@ -174,7 +174,7 @@ namespace AdventureGame
                             if (choice == "drop")
                             {
                                 //Dynamically add drops for each cavern here
-                                if (ChapterOne.ChOne == true && ChapterOne.Cav1 == true)
+                                if (ChapterOne.running == true && ChapterOne.Cav1 == true)
                                 {
                                     ChapterOne.ChamberOneDrop.Add(backpackWeapons[weaponIndex]);
                                     Narration("You remove your " + backpackWeapons[weaponIndex].Name + " from your pack.");
@@ -182,7 +182,7 @@ namespace AdventureGame
                                     Break();
                                     backpackWeapons.Remove(backpackWeapons[weaponIndex]);
                                 }
-                                else if(ChapterOne.ChOne == true && ChapterOne.Cav2 == true)
+                                else if(ChapterOne.running == true && ChapterOne.Cav2 == true)
                                 {
                                     ChapterOne.ChamberTwoDrop.Add(backpackWeapons[weaponIndex]);
                                     Narration("You remove your " + backpackWeapons[weaponIndex].Name + " from your pack.");
@@ -242,14 +242,14 @@ namespace AdventureGame
                             if (choice == "drop")
                             {
                                 //Dynamically add drop lists here
-                                if (ChapterOne.ChOne == true && ChapterOne.Cav1 == true)
+                                if (ChapterOne.running == true && ChapterOne.Cav1 == true)
                                 {
                                     ChapterOne.ChamberOneItemDrop.Add(backpackItems[ItemIndex]);
                                     Narration("You remove your " + backpackItems[ItemIndex].Name + " from your pack.");
                                     Narration("It will remain in this chamber if you return.");
                                     Break();
                                 }
-                                else if(ChapterOne.ChOne == true && ChapterOne.Cav2 == true)
+                                else if(ChapterOne.running == true && ChapterOne.Cav2 == true)
                                 {
                                     ChapterOne.ChamberTwoItemDrop.Add(backpackItems[ItemIndex]);
                                     Narration("You remove your " + backpackItems[ItemIndex].Name + " from your pack.");

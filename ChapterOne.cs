@@ -11,7 +11,6 @@ namespace AdventureGame
         public static bool running = true;
         public static bool Cav2Puzzel = false;
         public static int KeystoneTotal = 5;
-        public static bool ChOne = true;
         public static bool Cav1 = false;
         public static bool Cav2 = false;
         public static bool Cav3 = false;
